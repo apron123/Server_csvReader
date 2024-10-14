@@ -1,0 +1,107 @@
+### spring config
+spring:
+  ## 내장 웹서버 사용 설정
+  main:
+    web-application-type: none
+  devtools:
+    livereload:
+      enabled: 'false'
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  ## task scheduling info
+  task:
+    scheduling:
+      pool-size: '5'
+      thread-name-prefix: csv-scheduler-
+  ## db mapping
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: 'true'
+  ## redis config
+  redis:
+    host: localhost
+    port: '6379'
+    channel: csvReader
+    msg-ide: nodeinfo
+
+### db info
+db:
+  ## base Database Connection
+  base:
+    driver: org.postgresql.Driver
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    url: jdbc:postgresql://localhost:35432/test
+    username: 1234
+    password: 1234
+    schema: asp
+    showSql: 'false'
+    ddlAuto: none
+    maxPoolSize: '5'
+
+### common api server config
+common:
+  api:
+    bulk:
+      protocol: http
+      host: localhost
+      port: 10300
+      url: ${common.api.bulk.protocol}://${common.api.bulk.host}:${common.api.bulk.port}/air/bulk
+    ba-dda:
+      protocol: http
+      host: localhost
+      port: 10900
+      url: ${common.api.ba-dda.protocol}://${common.api.ba-dda.host}:${common.api.ba-dda.port}/sys
+    widget:
+      protocol: http
+      host: localhost
+      port: 11420
+      url: ${common.api.widget.protocol}://${common.api.widget.host}:${common.api.widget.port}/widget/events/regist
+
+### widget event config
+## event_id = clientCd-siteCd-{zncd}{themecd}{unitsvccd}{gbcd}{evetcd}
+## ex) ESE-10000001-000EAS001E04
+widget:
+  api:
+    ## 클라이언트 코드
+    client-cd: ESE
+    ## 사이트 코드
+    site-cd: 10000001
+    evet-gb-cd: E
+    outb-main-gb: P
+    stat-evet-cd: 01
+    ## 이벤트 발생 문구 -2
+    stat-evet-cntn: 시정 {param} 기준치 이하로 발생하여 저시정 경보 발령 상태 입니다.
+    ## 이벤트 발생 문구 - 1
+    stat-evet-nm: 저시정 발생
+    ## 이벤트 등급
+    stat-evet-gd-cd: 90
+    ## 서비스 테마 코드
+    svc-theme-cd: AOS
+    ## 단위 서비스 코드
+    unit-svc-cd: 300
+    ## 좌표 경도
+    x-coordinate: 127.1125937
+    ## 좌표 위도
+    y-coordinate: 37.444897
+    z-coordinate: 0
+    zn-cd: 000
+    ## 이벤트 발생 지역
+    outb-plac: 테스트 비행단
+
+
+##################################################################
+
+
+## nodeinfo path
+csv:
+  node-info:
+    path:
+      base: /Users/zium/Desktop/work/17F/source/Sys_csvReader/src/main/resources/opc_backup/
+      target: /Users/zium/Desktop/work/17F/source/Sys_csvReader/src/main/resources/opc/
+  #    base: C:\\Users\\user\\Documents\\ziumks_source_20240227\\20F_otherWebApi\\src\\main\\resources\\opc_backup\\
+  #    target: C:\\Users\\user\\Documents\\ziumks_source_20240227\\20F_otherWebApi\\src\\main\\resources\\opc\\
+  plt:
+    path:
+      base: /Users/zium/Desktop/work/17F/source/Sys_csvReader/src/main/resources/plt_backup/
+      target: /Users/zium/Desktop/work/17F/source/Sys_csvReader/src/main/resources/plt/
